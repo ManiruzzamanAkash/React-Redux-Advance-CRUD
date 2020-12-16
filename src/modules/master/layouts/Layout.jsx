@@ -4,15 +4,20 @@ import Navbar from './navbar/Navbar';
 import Sidebar from './sidebar/Sidebar'
 
 const Layout = (props) => {
+    const { dashboard, sidebar, children } = props;
+
     return (
         <div id="wrapper">
-            <Sidebar />
+            {
+                typeof sidebar !== 'undefined' && sidebar === true &&
+                <Sidebar />
+            }
 
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <Navbar />
+                    <Navbar dashboard={dashboard}/>
                     <div className="container-fluid">
-                        {props.children}
+                        {children}
                     </div>
                 </div>
                 {/* <!-- End of Main Content --> */}

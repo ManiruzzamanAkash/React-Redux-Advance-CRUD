@@ -1,5 +1,7 @@
 import React from 'react'
 const Navbar = (props) => {
+    const { dashboard } = props;
+
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
@@ -8,11 +10,14 @@ const Navbar = (props) => {
 
             <ul class="navbar-nav">
                 <li className="nav-item">
+                {
+                    typeof dashboard !== 'undefined' && dashboard === true &&
                     <a className="nav-link" href="/">
                         <span className="btn btn-info btn-sm">
                             <i className="fas fa-eye fa-fw"></i> Visit Site
                         </span>
                     </a>
+                }
                 </li>
             </ul>
 
@@ -39,6 +44,17 @@ const Navbar = (props) => {
                     </div>
                 </li>
 
+                <li className="nav-item dropdown no-arrow">
+                    {
+                        typeof dashboard === 'undefined' || dashboard === false &&
+                        <a className="nav-link" href="/auth/login">
+                            <span className="btn btn-info btn-sm">
+                                User Login <i className="fas fa-sign-out-alt fa-fw"></i> 
+                            </span>
+                        </a>
+                    }
+                </li>
+                
                 <div className="topbar-divider d-none d-sm-block"></div>
 
                 <li className="nav-item dropdown no-arrow">
@@ -50,18 +66,23 @@ const Navbar = (props) => {
                         <img className="img-profile rounded-circle"
                             src="/assets/img/user.svg" />
                     </a>
-                    <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="userDropdown">
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
-                        </a>
-                    </div>
+
+                    {
+                        typeof dashboard !== 'undefined' && dashboard === true &&
+                        <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a className="dropdown-item" href="#">
+                                <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <div className="dropdown-divider"></div>
+                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    }
+                    
                 </li>
             </ul>
         </nav>
