@@ -3,7 +3,7 @@ import Footer from './footer/Footer'
 import Navbar from './navbar/Navbar';
 import Sidebar from './sidebar/Sidebar'
 
-const AdminLayout = (props) => {
+const Layout = (props) => {
     return (
         <div id="wrapper">
             <Sidebar />
@@ -23,4 +23,4 @@ const AdminLayout = (props) => {
     );
 }
 
-export default AdminLayout;
+export default Layout;
