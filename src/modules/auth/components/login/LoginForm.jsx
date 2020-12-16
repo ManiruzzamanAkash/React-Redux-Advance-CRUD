@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeLoginInput, loginSubmitAction } from '../../redux/actions/AuthAction';
+import { getAuthAction, handleChangeLoginInput, loginSubmitAction } from '../../redux/actions/AuthAction';
 
 const LoginForm = withRouter(({history}) => {
     const { register, handleSubmit, errors } = useForm();
@@ -12,6 +12,7 @@ const LoginForm = withRouter(({history}) => {
     const loginMessage = useSelector((state) => state.auth.loginMessage);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const loginData = useSelector((state) => state.auth.loginData);
+    const authUserData = useSelector((state) => state.auth.authUserData);
 
     const submitHandler = () => {
         dispatch(loginSubmitAction(loginData));
@@ -22,9 +23,15 @@ const LoginForm = withRouter(({history}) => {
     };
 
     useEffect(() => {
+        dispatch(getAuthAction());
         if (typeof loginMessage !== 'undefined' || loginMessage !== null) {
             if (isLoggedIn && loginMessage.length > 0) {
-                history.push("/dashboard");
+                history.replace("/dashboard");
+            }
+        }
+        if(history.location.pathname === '/auth/login'){
+            if(typeof authUserData !== 'undefined' && authUserData !== null ){
+                history.replace("/dashboard");
             }
         }
     }, [isLoggedIn, loginMessage, history]);

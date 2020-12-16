@@ -3,8 +3,8 @@ import * as Types from "../types/Types";
 // Initial state
 const initialState = {
     isLoggedIn: false,
-    authUserData: {},
-    authTokenData: {},
+    authUserData: null,
+    authTokenData: null,
     loginMessage: "",
     registerMessage: "",
     isLoading: false,
@@ -61,6 +61,14 @@ const AuthReducer = (state = initialState, action) => {
             return {
                 ...state,
                 registerData
+            };
+
+        case Types.GET_AUTH_DATA:
+            return {
+                ...state,
+                isLoggedIn: action.payload.status,
+                authUserData: action.payload.userData,
+                authTokenData: action.payload.tokenData,
             };
 
         case Types.AUTH_POST_LOGOUT:

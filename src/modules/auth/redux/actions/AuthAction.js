@@ -134,3 +134,25 @@ export const logoutAction = () => async(dispatch) => {
     response.isLoading = false;
     dispatch({ type: Types.AUTH_POST_LOGOUT, payload: response });
 };
+
+
+export const getAuthAction = () => async(dispatch) => {
+    let data = {
+        status: false,
+        access_token: null,
+        userData: null
+    };
+
+    const userData = localStorage.getItem('userData');
+    const tokenData = localStorage.getItem('access_token');
+
+    if (userData != null && tokenData != null) {
+        data.status = true;
+        data.userData = JSON.parse(userData);
+        data.access_token = tokenData;
+    } else {
+        data.status = false;
+    }
+
+    dispatch({ type: Types.GET_AUTH_DATA, payload: data });
+};
