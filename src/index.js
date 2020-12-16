@@ -7,6 +7,9 @@ import HttpsRedirect from "react-https-redirect";
 import { ToastContainer, toast } from 'react-toastify';
 // import LocalStorageService from "./services/LocalStorageService";
 
+// Mandatory CSS
+import 'react-toastify/dist/ReactToastify.css';
+
 import App from "./App";
 
 // Import reducer

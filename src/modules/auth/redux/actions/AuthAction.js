@@ -33,17 +33,15 @@ export const loginSubmitAction = (postData) => async(dispatch) => {
                 localStorage.setItem('is_logged_in', true);
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('userData', JSON.stringify(user));
+                toast.success(response.message);
             }
         })
         .catch((err) => {
-            console.log('err', err)
-            response.message = err.data;
+            const message = JSON.parse(err.request.response).message;
+            response.message = message;
+            toast.error(message);
         });
-    if (response.status) {
-        toast.success(response.message);
-    } else {
-        toast.error(response.message);
-    }
+
     response.isLoading = false;
     dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
 };
