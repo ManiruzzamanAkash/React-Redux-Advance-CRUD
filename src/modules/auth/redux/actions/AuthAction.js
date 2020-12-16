@@ -126,7 +126,6 @@ export const logoutAction = () => async(dispatch) => {
         if (typeof window !== 'undefined') {
             window.loction.href = "/auth/login";
         }
-
     } catch (error) {
         response.message = 'Something Went Wrong !';
         toast.error(error);

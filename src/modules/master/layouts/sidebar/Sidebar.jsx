@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Sidebar = (props) => {
+const Sidebar = () => {
     return (
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -21,10 +21,10 @@ const Sidebar = (props) => {
 
             {/* <!-- Nav Item - Dashboard --> */}
             <li className="nav-item active">
-                <a className="nav-link" href="/">
+                <Link to="/dashboard" className="nav-link">
                     <i className="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
-                </a>
+                </Link>
             </li>
 
             {/* <!-- Divider --> */}
@@ -56,10 +56,10 @@ const Sidebar = (props) => {
             </li>
 
             <li className="nav-item">
-                <a className="nav-link" href="/dashboard">
+                <Link className="nav-link collapse-item" to="/page">
                     <i className="fas fa-fw fa-table"></i>
-                    <span>Link</span>
-                </a>
+                    <span>Custom Page..</span>
+                </Link>
             </li>
 
             <hr className="sidebar-divider d-none d-md-block" />

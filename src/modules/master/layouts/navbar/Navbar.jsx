@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { getAuthAction, logoutAction } from '../../../auth/redux/actions/AuthAction';
 
 const Navbar = (props) => {
@@ -24,6 +24,12 @@ const Navbar = (props) => {
                 history.push("/auth/login");
             }
         }
+        const { pathname } = history.location;
+        if(pathname !== '/auth/login' && pathname !== '/auth/sign-up' && pathname !== '/'){
+            if(typeof authUserData === 'undefined' || authUserData === null ){
+                history.replace("/auth/login");
+            }
+        }
     }, [isLoggedIn, loginMessage, history]);
 
     return (
@@ -36,11 +42,11 @@ const Navbar = (props) => {
                 <li className="nav-item">
                     {
                         typeof dashboard !== 'undefined' && dashboard === true &&
-                        <a className="nav-link" href="/">
+                        <Link to="/" className="nav-link">
                             <span className="btn btn-info btn-sm">
                                 <i className="fas fa-eye fa-fw"></i> Visit Site
-                        </span>
-                        </a>
+                            </span>
+                        </Link>
                     }
                 </li>
             </ul>
@@ -71,16 +77,13 @@ const Navbar = (props) => {
                 <li className="nav-item dropdown no-arrow">
                     {
                         dashboard === false &&
-                        <a className="nav-link" href="/auth/login">
-                            <span className="btn btn-info btn-sm">
+                        <Link to="/auth/login" className="nav-link">
+                        <span className="btn btn-info btn-sm">
                                 User Login <i className="fas fa-sign-out-alt fa-fw"></i>
                             </span>
-                        </a>
+                        </Link>
                     }
                 </li>
-
-
-
                 {
                     typeof authUserData !== 'undefined' && authUserData !== null &&
                     <>

@@ -34,7 +34,7 @@ const LoginForm = withRouter(({history}) => {
                 history.replace("/dashboard");
             }
         }
-    }, [isLoggedIn, loginMessage, history]);
+    }, [isLoggedIn, loginMessage, history, authUserData, dispatch]);
     return (
         <form className="user" onSubmit={handleSubmit(submitHandler)} method="POST">
             <div className="form-group">
