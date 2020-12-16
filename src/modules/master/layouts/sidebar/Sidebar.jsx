@@ -9,7 +9,7 @@ const Sidebar = (props) => {
             <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div className="sidebar-brand-icon rotate-n-15">
                     {/* <i className="fas fa-laugh-wink"></i> */}
-                    <img src="/logo192.png" style={{ width: 40 }}/>
+                    <img src="/logo192.png" style={{ width: 40 }} alt=""/>
                 </div>
                 <div className="sidebar-brand-text mx-3">
                     React CRUD
@@ -38,18 +38,18 @@ const Sidebar = (props) => {
             <li className="nav-item">
                 <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productsCollapse"
                     aria-expanded="true" aria-controls="productsCollapse">
-                    <i class="far fa-list-alt"></i> {" "}
+                    <i className="far fa-list-alt"></i> {" "}
                     <span>Products</span>
                 </a>
                 <div id="productsCollapse" className="collapse in show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div className="bg-white py-2 collapse-inner rounded">
                         <h6 className="collapse-header">Manage Products:</h6>
                         <Link className="collapse-item" to="/products">
-                            <i class="far fa-list-alt"></i> {" "} Product List
+                            <i className="far fa-list-alt"></i> {" "} Product List
                         </Link>
 
                         <Link className="collapse-item" to="/products/create">
-                            <i class="fas fa-plus-circle"></i> {" "} New Product
+                            <i className="fas fa-plus-circle"></i> {" "} New Product
                         </Link>
                     </div>
                 </div>

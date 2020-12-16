@@ -109,3 +109,28 @@ export const registerSubmitAction = (postData) => async(dispatch) => {
     response.isLoading = false;
     dispatch({ type: Types.AUTH_REGISTER_SUBMIT, payload: response });
 };
+
+export const logoutAction = () => async(dispatch) => {
+    let response = {
+        status: false,
+        message: "",
+        isLoading: true,
+    };
+    dispatch({ type: Types.AUTH_POST_LOGOUT, payload: response });
+
+    try {
+        localStorage.removeItem('is_logged_in');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('userData');
+        toast.success('Logged out successfully !');
+        if (typeof window !== 'undefined') {
+            window.loction.href = "/auth/login";
+        }
+
+    } catch (error) {
+        response.message = 'Something Went Wrong !';
+        toast.error(error);
+    }
+    response.isLoading = false;
+    dispatch({ type: Types.AUTH_POST_LOGOUT, payload: response });
+};

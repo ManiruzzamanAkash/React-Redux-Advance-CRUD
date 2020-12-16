@@ -15,7 +15,7 @@ const Layout = (props) => {
 
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <Navbar dashboard={dashboard}/>
+                    <Navbar dashboard={dashboard} />
                     <div className="container-fluid">
                         {children}
                     </div>

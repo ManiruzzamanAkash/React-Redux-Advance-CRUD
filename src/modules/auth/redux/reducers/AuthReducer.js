@@ -63,6 +63,13 @@ const AuthReducer = (state = initialState, action) => {
                 registerData
             };
 
+        case Types.AUTH_POST_LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+                loginMessage: action.payload.message
+            };
+
         default:
             break;
     }

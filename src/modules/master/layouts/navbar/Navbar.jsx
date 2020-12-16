@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import { logoutAction } from '../../../auth/redux/actions/AuthAction';
+
 const Navbar = (props) => {
     const { dashboard } = props;
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const loginMessage = useSelector((state) => state.auth.loginMessage);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+    const logout = () => {
+        dispatch(logoutAction());
+    }
+
+    useEffect(() => {
+        if (typeof loginMessage !== 'undefined' || loginMessage !== null) {
+            if (!isLoggedIn && loginMessage.length > 0) {
+                history.push("/auth/login");
+            }
+        }
+    }, [isLoggedIn, loginMessage, history]);
 
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -8,7 +30,7 @@ const Navbar = (props) => {
                 <i className="fa fa-bars"></i>
             </button>
 
-            <ul class="navbar-nav">
+            <ul className="navbar-nav">
                 <li className="nav-item">
                 {
                     typeof dashboard !== 'undefined' && dashboard === true &&
@@ -46,7 +68,7 @@ const Navbar = (props) => {
 
                 <li className="nav-item dropdown no-arrow">
                     {
-                        typeof dashboard === 'undefined' || dashboard === false &&
+                        dashboard === false &&
                         <a className="nav-link" href="/auth/login">
                             <span className="btn btn-info btn-sm">
                                 User Login <i className="fas fa-sign-out-alt fa-fw"></i> 
@@ -76,9 +98,10 @@ const Navbar = (props) => {
                                 Profile
                             </a>
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a className="dropdown-item" onClick={() => logout()} data-toggle="modal" data-target="#logoutModal">
                                 <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                
+                                {isLoading ? 'Logout...' : 'Logout'}
                             </a>
                         </div>
                     }
