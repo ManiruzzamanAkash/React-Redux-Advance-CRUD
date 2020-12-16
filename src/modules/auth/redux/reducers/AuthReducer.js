@@ -8,7 +8,11 @@ const initialState = {
     loginMessage: "",
     registerMessage: "",
     isLoading: false,
-    submitLogout: false
+    submitLogout: false,
+    loginData: {
+        email: '',
+        password: '',
+    }
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -23,6 +27,14 @@ const AuthReducer = (state = initialState, action) => {
                 authTokenData: action.payload.tokenData,
                 loginMessage: action.payload.message,
                 isLoading: action.payload.isLoading
+            };
+
+        case Types.CHANGE_LOGIN_INPUT:
+            const loginData = {...state.loginData };
+            loginData[action.payload.name] = action.payload.value;
+            return {
+                ...state,
+                loginData
             };
 
         default:

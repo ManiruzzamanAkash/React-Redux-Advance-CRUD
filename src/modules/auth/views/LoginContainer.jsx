@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from '../components/login/LoginForm';
+import { Link } from 'react-router-dom';    
 
 const LoginContainer = () => {
     return (
@@ -20,12 +21,10 @@ const LoginContainer = () => {
                                             </div>
 
                                             <LoginForm />
-
-                                            <div className="text-center">
-                                                <a className="small" href="forgot-password.html">Forgot Password?</a>
-                                            </div>
-                                            <div className="text-center">
-                                                <a className="small" href="register.html">Create an Account!</a>
+                                            <div className="text-center mt-5">
+                                                <Link to="/auth/sign-up" className="small">
+                                                    Create an Account <i className="fa fa-user-plus"></i>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
