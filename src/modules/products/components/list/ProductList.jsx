@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
+import LoadingSpinner from '../../../master/components/loading/LoadingSpinner';
 import { getProductsAction } from '../../redux/actions/ProductAction';
+import ProductShortInfo from './ProductShortInfo';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -10,46 +10,46 @@ const ProductList = () => {
     const isLoading = useSelector((state) => state.product.isLoading);
     const products = useSelector((state) => state.product.products);
 
-    console.log('products :>> ', products);
-
     useEffect(() => {
         dispatch(getProductsAction());
-    }, []);
+    }, [dispatch]);
+
     return (
-        <div className="">
-            <table className="table table-bordered">
-                <thead>
-                    <th>Sl</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    {
-                        products.map((product, index) => (
+        <>
+            {
+                isLoading &&
+                <LoadingSpinner text="Loading Products..."/>
+            }
+            {
+                !isLoading && products.length === 0 &&
+                <div className="alert alert-warning">
+                    Sorry ! No Product Found.
+                </div>
+            }
+            {
+                !isLoading &&
+                <div className="table-responsive">
+                    <table className="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>{index+1}</td>
-                                <td>{product.title}</td>
-                                <td>{product.price}</td>
-                                <td>{product.description}</td>
-                                <td>
-                                    <Link to={`/products/view/${product.id}`} title="Product Detail">
-                                        <i className="fa fa-eye text-info"></i>
-                                    </Link>
-                                    <Link to={`/products/edit/${product.id}`} title="Product Edit" className="ml-2">
-                                        <i className="fa fa-edit text-success"></i>
-                                    </Link>
-                                    <button className="btn ml-2" title="Product Delete" >
-                                        <i className="fa fa-trash text-danger"></i>
-                                    </button>
-                                </td>
+                                <th>Sl</th>
+                                <th className='td-product-title'>Product</th>
+                                <th>Price</th>
+                                <th>Description</th>
+                                <th className='td-action'>Action</th>
                             </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-        </div>
+                        </thead>
+                        <tbody>
+                            {
+                                products.map((product, index) => (
+                                    <ProductShortInfo key={index} index={index} product={product} />
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </>
     );
 }
 
