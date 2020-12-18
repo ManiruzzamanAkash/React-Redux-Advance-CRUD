@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { getAuthAction, handleChangeLoginInput, loginSubmitAction } from '../../redux/actions/AuthAction';
 
-const LoginForm = withRouter(({history}) => {
+const ProductCreate = withRouter(({history}) => {
     const { register, handleSubmit, errors } = useForm();
     const dispatch = useDispatch();
 
@@ -95,4 +95,4 @@ const LoginForm = withRouter(({history}) => {
     );
 })
 
-export default LoginForm;
+export default ProductCreate;

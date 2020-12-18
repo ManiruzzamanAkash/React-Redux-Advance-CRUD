@@ -8,12 +8,12 @@ export const handleChangeProductInputAction = (name, value) => (dispatch) => {
         name: name,
         value: value,
     }
-    dispatch({ type: Types.CHANGE_REGISTER_INPUT, payload: data });
+    dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
 };
 
-export const getProductsAction = (postData) => async(dispatch) => {
+export const getProductsAction = () => async(dispatch) => {
     let response = {
-        posts: [],
+        products: [],
         status: false,
         message: "",
         isLoading: true,
@@ -22,11 +22,11 @@ export const getProductsAction = (postData) => async(dispatch) => {
     dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
 
     try {
-        await Axios.get(`${process.env.REACT_APP_API_URL}products/view/all`, postData)
+        await Axios.get(`${process.env.REACT_APP_API_URL}products/view/all`)
             .then((res) => {
                 const { data, message, status } = res.data;
                 response.status = status;
-                response.posts = data.data;
+                response.products = data.data;
                 response.isLoading = false;
             })
             .catch((err) => {
@@ -43,7 +43,7 @@ export const getProductsAction = (postData) => async(dispatch) => {
 
 export const storeNewProduct = (postData) => async(dispatch) => {
     let response = {
-        posts: [],
+        products: [],
         status: false,
         message: "",
         isLoading: true,
@@ -56,7 +56,7 @@ export const storeNewProduct = (postData) => async(dispatch) => {
             .then((res) => {
                 const { data, message, status } = res.data;
                 response.status = status;
-                response.posts = data.data;
+                response.products = data.data;
                 response.isLoading = false;
             })
             .catch((err) => {

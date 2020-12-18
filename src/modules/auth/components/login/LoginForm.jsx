@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { getAuthAction, handleChangeLoginInput, loginSubmitAction } from '../../redux/actions/AuthAction';
 
-const LoginForm = withRouter(({history}) => {
+const LoginForm = withRouter(({ history }) => {
     const { register, handleSubmit, errors } = useForm();
     const dispatch = useDispatch();
 
@@ -26,11 +26,13 @@ const LoginForm = withRouter(({history}) => {
         dispatch(getAuthAction());
         if (typeof loginMessage !== 'undefined' || loginMessage !== null) {
             if (isLoggedIn && loginMessage.length > 0) {
-                history.replace("/dashboard");
+                if (history.location.pathname === '/auth/login') {
+                    history.replace("/dashboard");
+                }
             }
         }
-        if(history.location.pathname === '/auth/login'){
-            if(typeof authUserData !== 'undefined' && authUserData !== null ){
+        if (history.location.pathname === '/auth/login') {
+            if (typeof authUserData !== 'undefined' && authUserData !== null) {
                 history.replace("/dashboard");
             }
         }
@@ -79,13 +81,13 @@ const LoginForm = withRouter(({history}) => {
             </div>
 
             {
-                !isLoading && 
+                !isLoading &&
                 <button className="btn btn-primary btn-user btn-block" type="submit">
                     Login
                 </button>
             }
             {
-                isLoading && 
+                isLoading &&
                 <button className="btn btn-primary btn-user btn-block" type="button" disabled>
                     Logging In {"  "}
                     <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
