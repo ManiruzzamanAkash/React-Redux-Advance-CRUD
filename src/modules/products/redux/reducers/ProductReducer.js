@@ -2,7 +2,7 @@ import * as Types from "../types/Types";
 
 // Initial state
 const initialState = {
-    posts: [],
+    products: [],
     isLoading: false,
     inputData: {
         title: '',
@@ -20,18 +20,18 @@ const initialState = {
     deleteMessage: '',
 };
 
-const PostReducer = (state = initialState, action) => {
+const ProductReducer = (state = initialState, action) => {
     const newState = {...state };
 
     switch (action.type) {
-        case Types.POST_LIST_DASHBOARD:
+        case Types.PRODUCT_LIST_DASHBOARD:
             return {
                 ...state,
-                posts: action.payload.posts,
+                products: action.payload.products,
                 isLoading: action.payload.isLoading
             };
 
-        case Types.CHANGE_POST_INPUT:
+        case Types.CHANGE_PRODUCT_INPUT:
             const inputData = {...state.inputData };
             inputData[action.payload.name] = action.payload.value;
             return {
@@ -45,4 +45,4 @@ const PostReducer = (state = initialState, action) => {
     return newState;
 };
 
-export default PostReducer;
+export default ProductReducer;

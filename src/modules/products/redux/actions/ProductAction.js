@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import * as Types from "../types/Types";
 
-export const handleChangePostInputAction = (name, value) => (dispatch) => {
+export const handleChangeProductInputAction = (name, value) => (dispatch) => {
     let data = {
         name: name,
         value: value,
@@ -11,7 +11,7 @@ export const handleChangePostInputAction = (name, value) => (dispatch) => {
     dispatch({ type: Types.CHANGE_REGISTER_INPUT, payload: data });
 };
 
-export const getPostsAction = (postData) => async(dispatch) => {
+export const getProductsAction = (postData) => async(dispatch) => {
     let response = {
         posts: [],
         status: false,
@@ -19,7 +19,7 @@ export const getPostsAction = (postData) => async(dispatch) => {
         isLoading: true,
         errors: []
     };
-    dispatch({ type: Types.POST_LIST_DASHBOARD, payload: response });
+    dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
 
     try {
         await Axios.get(`${process.env.REACT_APP_API_URL}products/view/all`, postData)
@@ -38,10 +38,10 @@ export const getPostsAction = (postData) => async(dispatch) => {
     }
 
     response.isLoading = false;
-    dispatch({ type: Types.POST_LIST_DASHBOARD, payload: response });
+    dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
 };
 
-export const storeNewPost = (postData) => async(dispatch) => {
+export const storeNewProduct = (postData) => async(dispatch) => {
     let response = {
         posts: [],
         status: false,
@@ -49,7 +49,7 @@ export const storeNewPost = (postData) => async(dispatch) => {
         isLoading: true,
         errors: []
     };
-    dispatch({ type: Types.CREATE_POST, payload: response });
+    dispatch({ type: Types.CREATE_PRODUCT, payload: response });
 
     try {
         await Axios.post(`${process.env.REACT_APP_API_URL}products`, postData)
@@ -68,5 +68,5 @@ export const storeNewPost = (postData) => async(dispatch) => {
     }
 
     response.isLoading = false;
-    dispatch({ type: Types.CREATE_POST, payload: response });
+    dispatch({ type: Types.CREATE_PRODUCT, payload: response });
 };
