@@ -1,10 +1,14 @@
 import React from 'react';
 import LoginForm from '../components/login/LoginForm';
-import { Link } from 'react-router-dom';    
+import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet"    
 
 const LoginContainer = () => {
     return (
         <>
+            <Helmet>
+                <title>Login | React CRUD Application</title>
+            </Helmet>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-xl-10 col-lg-12 col-md-9">

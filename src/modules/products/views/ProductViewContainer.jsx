@@ -5,7 +5,7 @@ import ProductView from '../components/view/ProductView';
 
 const ProductViewContainer = (props) => {
     return (
-        <Layout sidebar={true} dashboard={true}>
+        <Layout sidebar={true} dashboard={true} title="Product Detail">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Product Details</h1>
 

@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout';
 const DefaultContainer = () => {
     return ( 
         <>
-            <Layout sidebar={false} dashboard={false}>
+            <Layout sidebar={false} dashboard={false} title="Home Page Public">
                 <ProductListFrontend />
             </Layout>
         </>

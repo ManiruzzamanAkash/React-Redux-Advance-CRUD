@@ -9,7 +9,7 @@ const ProductListContainer = () => {
     const products = useSelector((state) => state.product.productsPaginatedData);
 
     return (
-        <Layout sidebar={true} dashboard={true}>
+        <Layout sidebar={true} dashboard={true} title="Products">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">
                     My Products {' '}

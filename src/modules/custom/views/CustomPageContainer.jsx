@@ -3,7 +3,7 @@ import Layout from '../../master/layouts/Layout';
 
 const CustomPageContainer = () => {
     return (
-        <Layout sidebar={true} dashboard={true}>
+        <Layout sidebar={true} dashboard={true} title="Custom Page">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Custom Page</h1>
             </div>
