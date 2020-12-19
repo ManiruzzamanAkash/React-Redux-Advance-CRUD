@@ -13,6 +13,7 @@ const initialState = {
         image: null,
         imagePreviewUrl: null
     },
+    productEditData: null,
     productDetail: null,
     errors: [],
     addStatus: false,
@@ -46,6 +47,14 @@ const ProductReducer = (state = initialState, action) => {
                 productData
             };
 
+        case Types.CHANGE_PRODUCT_INPUT_UPDATE:
+            const productEditData = {...state.productEditData };
+            productEditData[action.payload.name] = action.payload.value;
+            return {
+                ...state,
+                productEditData
+            };
+
         case Types.PRODUCT_DETAIL:
             return {
                 ...state,
@@ -56,7 +65,7 @@ const ProductReducer = (state = initialState, action) => {
         case Types.EDIT_PRODUCT_INFO:
             return {
                 ...state,
-                productData: action.payload.productDetail,
+                productEditData: action.payload.productDetail,
                 isLoading: action.payload.isLoading,
             };
 

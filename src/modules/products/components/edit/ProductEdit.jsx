@@ -25,14 +25,14 @@ const ProductEdit = ({ id }) => {
     const editing = useSelector((state) => state.product.editing);
     const editStatus = useSelector((state) => state.product.editStatus);
     const editMessage = useSelector((state) => state.product.editMessage);
-    const productData = useSelector((state) => state.product.productData);
+    const productEditData = useSelector((state) => state.product.productEditData);
 
     const submitHandler = (data) => {
-        dispatch(updateProductAction(productData, id))
+        dispatch(updateProductAction(productEditData, id))
     }
 
     const handleChangeTextInput = (name, value, e = null) => {
-        dispatch(handleChangeProductInputAction(name, value, e));
+        dispatch(handleChangeProductInputAction(name, value, e, true));
     };
 
     useEffect(() => {
@@ -52,7 +52,7 @@ const ProductEdit = ({ id }) => {
                 <LoadingSpinner text="Loading Product Details..." />
             }
             {
-                typeof productData != 'undefined' && productData != null &&
+                typeof productEditData != 'undefined' && productEditData != null &&
                 <Form
                     onSubmit={handleSubmit(submitHandler)}
                     method="POST"
@@ -63,7 +63,7 @@ const ProductEdit = ({ id }) => {
                             <Form.Label>Title <span className="text-danger text-sm">*</span></Form.Label>
                             <Form.Control
                                 onChange={(e) => handleChangeTextInput('title', e.target.value)}
-                                value={productData.title}
+                                value={productEditData.title}
                                 required=""
                                 name="title"
                                 placeholder="Enter Product Title"
@@ -76,7 +76,7 @@ const ProductEdit = ({ id }) => {
                             <Form.Control
                                 type="number"
                                 onChange={(e) => handleChangeTextInput('price', e.target.value)}
-                                value={productData.price}
+                                value={productEditData.price}
                                 required=""
                                 name="price"
                                 placeholder="Enter Product Price"
@@ -89,7 +89,7 @@ const ProductEdit = ({ id }) => {
                     <Form.Group controlId="formGridAddress2">
                         <Form.Label>Description <span className="text-info text-sm">(Optional)</span></Form.Label>
                         <SimpleEditor
-                            value={productData.description}
+                            value={productEditData.description}
                             onValueChange={(e) => handleChangeTextInput('description', e)}
                         />
                     </Form.Group>
@@ -103,10 +103,10 @@ const ProductEdit = ({ id }) => {
                             ref={register}
                         />
                         {
-                            productData.imagePreviewUrl !== null &&
+                            productEditData.imagePreviewUrl !== null &&
                             <div className="imgPreview" title="Remove">
                                 <div className="preview-delete-icon"><i className="fa fa-times text-danger" onClick={() => dispatch(deleteProductImagePreview())}></i></div>
-                                <img src={productData.imagePreviewUrl} className="img img-thumbnail" />
+                                <img src={productEditData.imagePreviewUrl} className="img img-thumbnail" />
                             </div>
                         }
                     </Form.Group>

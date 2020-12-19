@@ -5,12 +5,13 @@ import { showToast } from "../../../master/utils/ToastHelper";
 
 import * as Types from "../types/Types";
 
-export const handleChangeProductInputAction = (name, value, e) => (dispatch) => {
+export const handleChangeProductInputAction = (name, value, e, isEdit = false) => (dispatch) => {
     let data = {
         name: name,
         value: value,
     }
-    dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
+    const type = !isEdit ? Types.CHANGE_PRODUCT_INPUT : Types.CHANGE_PRODUCT_INPUT_UPDATE;
+    dispatch({ type: type, payload: data });
 
     if (name === 'image') {
         let reader = new FileReader();
@@ -18,7 +19,7 @@ export const handleChangeProductInputAction = (name, value, e) => (dispatch) => 
         reader.onloadend = () => {
             data.name = 'imagePreviewUrl';
             data.value = reader.result;
-            dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
+            dispatch({ type: type, payload: data });
         }
         reader.readAsDataURL(file)
     }
