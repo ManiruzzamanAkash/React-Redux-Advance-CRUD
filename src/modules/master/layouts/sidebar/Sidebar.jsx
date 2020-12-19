@@ -6,7 +6,7 @@ const Sidebar = () => {
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             {/* <!-- Sidebar - Brand --> */}
-            <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
                 <div className="sidebar-brand-icon rotate-n-15">
                     {/* <i className="fas fa-laugh-wink"></i> */}
                     <img src="/logo192.png" style={{ width: 40 }} alt=""/>
@@ -14,7 +14,7 @@ const Sidebar = () => {
                 <div className="sidebar-brand-text mx-3">
                     React CRUD
                 </div>
-            </a>
+            </Link>
 
             {/* <!-- Divider --> */}
             <hr className="sidebar-divider my-0" />
