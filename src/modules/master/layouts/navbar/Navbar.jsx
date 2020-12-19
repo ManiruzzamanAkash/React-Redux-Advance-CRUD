@@ -53,10 +53,6 @@ const Navbar = (props) => {
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item dropdown no-arrow d-sm-none">
-                    <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i className="fas fa-search fa-fw"></i>
-                    </a>
                     <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                         aria-labelledby="searchDropdown">
                         <form className="form-inline mr-auto w-100 navbar-search">
@@ -89,29 +85,26 @@ const Navbar = (props) => {
                     <>
                         <div className="topbar-divider d-none d-sm-block"></div>
                         <li className="nav-item dropdown no-arrow">
-                            <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="mr-2 d-none d-lg-inline text-gray-600 small">
+                            <button className="btn btn-link nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {authUserData.name}
                                 </span>
                                 <img className="img-profile rounded-circle"
-                                    src="/assets/img/user.svg" />
-                            </a>
-
+                                    src="/assets/img/user.svg" alt=""/>
+                            </button>
                             {
                                 typeof dashboard !== 'undefined' && dashboard === true &&
                                 <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="/my-profile">
                                         <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
+                                        Profile
+                                    </Link>
                                     <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" onClick={() => logout()} data-toggle="modal" data-target="#logoutModal">
+                                    <button className="btn btn-link dropdown-item" onClick={() => logout()} data-toggle="modal" data-target="#logoutModal">
                                         <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-
                                         {isLoading ? 'Logout...' : 'Logout'}
-                                    </a>
+                                    </button>
                                 </div>
                             }
 
