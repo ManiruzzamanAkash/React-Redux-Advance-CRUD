@@ -50,7 +50,7 @@ const ProductShortInfo = (props) => {
             </td>
             <td>
                 <p className="card-text text-center">
-                    <strong>Time: </strong> {moment(product.created_at).format("Do MMM YYYY HH:mm")}
+                    <strong>Time: </strong> {moment(product.created_at).format("Do MMM YYYY, hh:mm A")}
                     <br />
                     <>
                         <strong>By: </strong>

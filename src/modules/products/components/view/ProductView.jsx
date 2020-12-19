@@ -29,7 +29,7 @@ const ProductView = ({ id }) => {
                         <div className="col-4">
                             <img src={productDetail.image_url === null ? '/assets/img/products/no-image.png' : productDetail.image_url} className="img img-product-view" alt="" />
                             <p className="card-text text-center">
-                                <strong>Uploaded at: </strong> {moment(productDetail.created_at).format("Do MMM YYYY HH:mm")}
+                                <strong>Time: </strong> {moment(productDetail.created_at).format("Do MMM YYYY, hh:mm A")}
                                 <br />
                                 <>
                                     <strong>Uploaded by: </strong>
