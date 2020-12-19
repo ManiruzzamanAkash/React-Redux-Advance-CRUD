@@ -25,8 +25,8 @@ const Navbar = (props) => {
             }
         }
         const { pathname } = history.location;
-        if(pathname !== '/auth/login' && pathname !== '/auth/sign-up' && pathname !== '/' && !isLoggedIn){
-            if(typeof authUserData === 'undefined' || authUserData === null ){
+        if (pathname !== '/auth/login' && pathname !== '/auth/sign-up' && pathname !== '/' && !isLoggedIn) {
+            if (typeof authUserData === 'undefined' || authUserData === null) {
                 history.replace("/auth/login");
             }
         }
@@ -40,6 +40,17 @@ const Navbar = (props) => {
 
             <ul className="navbar-nav">
                 <li className="nav-item">
+                    {
+                        dashboard === false &&
+                        <div className="text-center">
+                            <div className="sidebar-brand-icon rotate-n-15">
+                                <img src="/logo192.png" style={{ width: 40 }} alt="" />
+                            </div>
+                            <div className="sidebar-brand-text mx-3">
+                                React CRUD
+                            </div>
+                        </div>
+                    }
                     {
                         typeof dashboard !== 'undefined' && dashboard === true &&
                         <Link to="/" className="nav-link">
@@ -74,7 +85,7 @@ const Navbar = (props) => {
                     {
                         dashboard === false &&
                         <Link to="/auth/login" className="nav-link">
-                        <span className="btn btn-info btn-sm">
+                            <span className="btn btn-info btn-sm">
                                 User Login <i className="fas fa-sign-out-alt fa-fw"></i>
                             </span>
                         </Link>
@@ -86,11 +97,11 @@ const Navbar = (props) => {
                         <div className="topbar-divider d-none d-sm-block"></div>
                         <li className="nav-item dropdown no-arrow">
                             <button className="btn btn-link nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">
+                                <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {authUserData.name}
                                 </span>
                                 <img className="img-profile rounded-circle"
-                                    src="/assets/img/user.svg" alt=""/>
+                                    src="/assets/img/user.svg" alt="" />
                             </button>
                             {
                                 typeof dashboard !== 'undefined' && dashboard === true &&
