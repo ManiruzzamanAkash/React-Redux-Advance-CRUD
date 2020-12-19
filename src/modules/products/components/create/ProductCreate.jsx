@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { deleteProductImagePreview, handleChangeProductInputAction, storeNewProduct, emptyProductMessage } from '../../redux/actions/ProductAction';
 import SimpleEditor from '../../../master/components/text-editor/SimpleEditor';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const ProductCreateSchema = yup.object().shape({
     title: yup.string().required('Please give product title'),
@@ -102,7 +102,7 @@ const ProductCreate = () => {
                     }
                 </Form.Group>
 
-                {!isLoading && <Button variant="primary" type="submit"> Save Product </Button>}
+                {!isLoading && <Button variant="primary" type="submit"><i className="fa fa-check"></i>  Save Product </Button>}
 
                 {
                     isLoading &&
@@ -110,6 +110,9 @@ const ProductCreate = () => {
                         Saving Product... {"  "} <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     </Button>
                 }
+                <Link className="btn btn-secondary ml-2" to="/products">
+                    <i className="fa fa-times"></i> Cancel
+                </Link>
             </Form>
 
 

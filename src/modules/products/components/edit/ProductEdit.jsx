@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { deleteProductImagePreview, handleChangeProductInputAction, updateProductAction, emptyProductMessage, getProductDetailAction } from '../../redux/actions/ProductAction';
 import SimpleEditor from '../../../master/components/text-editor/SimpleEditor';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LoadingSpinner from '../../../master/components/loading/LoadingSpinner';
 
 const ProductEditSchema = yup.object().shape({
@@ -37,12 +37,12 @@ const ProductEdit = ({ id }) => {
 
     useEffect(() => {
         dispatch(getProductDetailAction(id, true));
-        // if (typeof editStatus !== 'undefined' && editStatus === true && editMessage !== null && editMessage.length > 0) {
-        //     if (editStatus && editMessage.length > 0) {
-        //         dispatch(emptyProductMessage());
-        //         history.push("/products");
-        //     }
-        // }
+        if (typeof editStatus !== 'undefined' && editStatus === true && editMessage !== null && editMessage.length > 0) {
+            if (editStatus && editMessage.length > 0) {
+                dispatch(emptyProductMessage());
+                history.push("/products");
+            }
+        }
     }, [editStatus, editMessage]);
     return (
 
@@ -111,7 +111,7 @@ const ProductEdit = ({ id }) => {
                         }
                     </Form.Group>
 
-                    {!editing && <Button variant="primary" type="submit"> Save Product </Button>}
+                    {!editing && <Button variant="primary" type="submit"> <i className="fa fa-check"></i> Save Product </Button>}
 
                     {
                         editing &&
@@ -119,6 +119,9 @@ const ProductEdit = ({ id }) => {
                             Saving Product... {"  "} <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </Button>
                     }
+                    <Link className="btn btn-secondary ml-2" to="/products">
+                       <i className="fa fa-times"></i> Cancel
+                    </Link>
                 </Form>
             }
         </>
