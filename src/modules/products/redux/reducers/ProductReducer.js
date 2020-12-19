@@ -3,6 +3,7 @@ import * as Types from "../types/Types";
 // Initial state
 const initialState = {
     products: [],
+    productsPaginatedData: null,
     isLoading: false,
     inputData: {
         id: 0,
@@ -30,6 +31,7 @@ const ProductReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: action.payload.products,
+                productsPaginatedData: action.payload.productsPaginatedData,
                 isLoading: action.payload.isLoading
             };
 

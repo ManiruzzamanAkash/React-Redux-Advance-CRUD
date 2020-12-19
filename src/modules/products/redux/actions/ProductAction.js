@@ -33,7 +33,7 @@ export const deleteProductImagePreview = () => (dispatch) => {
     dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
 };
 
-export const getProductsAction = () => async(dispatch) => {
+export const getProductsAction = (page) => async(dispatch) => {
     let response = {
         products: [],
         status: false,
@@ -44,11 +44,12 @@ export const getProductsAction = () => async(dispatch) => {
     dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
 
     try {
-        await Axios.get(`${process.env.REACT_APP_API_URL}products/view/all`)
+        await Axios.get(`${process.env.REACT_APP_API_URL}products/view/all?page=${page}`)
             .then((res) => {
                 const { data, message, status } = res.data;
                 response.status = status;
                 response.products = data.data;
+                response.productsPaginatedData = data;
                 response.isLoading = false;
             })
             .catch((err) => {

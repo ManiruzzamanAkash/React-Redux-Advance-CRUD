@@ -19,6 +19,7 @@
     "react-hook-form": "^6.13.1",
     "react-hook-form-input": "^1.1.10",
     "react-https-redirect": "^1.1.0",
+    "react-laravel-paginex": "^2.0.8",
     "react-quill": "^1.3.5",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",

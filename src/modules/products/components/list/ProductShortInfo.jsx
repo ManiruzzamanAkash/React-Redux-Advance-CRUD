@@ -25,7 +25,6 @@ const ProductShortInfo = (props) => {
                     isShortText &&
                     <div>
                         {StripHTMLText(product.description, 20)}...
-                        <br />
                         <button className="btn btn-link btn-sm" onClick={() => setIsShortText(false)}>
                             View More <i className="fa fa-chevron-down"></i>
                         </button>
