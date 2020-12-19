@@ -4,8 +4,9 @@ import { Form, Col, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { deleteProductImagePreview, handleChangeProductInputAction, storeNewProduct } from '../../redux/actions/ProductAction';
+import { deleteProductImagePreview, handleChangeProductInputAction, storeNewProduct, emptyProductMessage } from '../../redux/actions/ProductAction';
 import SimpleEditor from '../../../master/components/text-editor/SimpleEditor';
+import { useHistory } from 'react-router-dom';
 
 const ProductCreateSchema = yup.object().shape({
     title: yup.string().required('Please give product title'),
@@ -18,9 +19,15 @@ const ProductCreate = () => {
         resolver: yupResolver(ProductCreateSchema)
     });
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const isLoading = useSelector((state) => state.product.isLoading);
+    const addStatus = useSelector((state) => state.product.addStatus);
+    const addMessage = useSelector((state) => state.product.addMessage);
     const inputData = useSelector((state) => state.product.inputData);
+
+    console.log('addStatus :>> ', addStatus);
+    console.log('addMessage :>> ', addMessage);
 
     const submitHandler = (data) => {
         dispatch(storeNewProduct(inputData))
@@ -36,7 +43,13 @@ const ProductCreate = () => {
         //         history.replace("/dashboard");
         //     }
         // }
-    }, []);
+        if (typeof addStatus !== 'undefined' && addStatus === true && addMessage !== null && addMessage.length > 0) {
+            if (addStatus && addMessage.length > 0) {
+                dispatch(emptyProductMessage());
+                history.push("/products");
+            }
+        }
+    }, [addStatus, addMessage]);
     return (
         <>
             <Form

@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { toast } from 'react-toastify';
 import { generateFormDataFromObject } from "../../../master/utils/FileHelper";
+import { showToast } from "../../../master/utils/ToastHelper";
 
 import * as Types from "../types/Types";
 
@@ -62,6 +63,10 @@ export const getProductsAction = () => async(dispatch) => {
     dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
 };
 
+export const emptyProductMessage = () => (dispatch) => {
+    dispatch({ type: Types.EMPTY_PRODUCT_MESSAGE, payload: null });
+};
+
 export const storeNewProduct = (postData) => async(dispatch) => {
     let response = {
         products: [],
@@ -80,9 +85,12 @@ export const storeNewProduct = (postData) => async(dispatch) => {
                 response.status = status;
                 response.products = data.data;
                 response.isLoading = false;
+                response.message = message;
+                showToast('success', message);
             })
             .catch((err) => {
                 toast.error(err);
+                showToast('error', err);
             });
     } catch (error) {
         response.message = 'Something Went Wrong !';

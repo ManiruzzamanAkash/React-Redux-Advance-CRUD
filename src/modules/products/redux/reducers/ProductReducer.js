@@ -41,6 +41,30 @@ const ProductReducer = (state = initialState, action) => {
                 inputData
             };
 
+        case Types.CREATE_PRODUCT:
+            return {
+                ...state,
+                addMessage: action.payload.message,
+                addStatus: action.payload.status,
+                isLoading: action.payload.isLoading,
+            };
+
+        case Types.EMPTY_PRODUCT_MESSAGE:
+            return {
+                ...state,
+                addMessage: null,
+                editMessage: null,
+                deleteMessage: null,
+                inputData: {
+                    id: 0,
+                    title: '',
+                    description: '',
+                    price: '',
+                    image: null,
+                    imagePreviewUrl: null
+                }
+            };
+
         default:
             break;
     }
