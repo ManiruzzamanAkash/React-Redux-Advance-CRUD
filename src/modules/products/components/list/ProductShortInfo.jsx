@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { StripHTMLText } from '../../../master/utils/StringHelper';
 import moment from 'moment';
+import { StripHTMLText } from '../../../master/utils/StringHelper';
+import ProductDeleteModal from '../delete/ProductDelete';
 const currencyFormatter = require('currency-formatter');
 
 const ProductShortInfo = (props) => {
@@ -64,9 +65,7 @@ const ProductShortInfo = (props) => {
                 <Link to={`/products/edit/${product.id}`} title="Product Edit" className="ml-2">
                     <i className="fa fa-edit text-success"></i>
                 </Link>
-                <button className="btn pl-2" title="Product Delete" >
-                    <i className="fa fa-trash text-danger"></i>
-                </button>
+                <ProductDeleteModal id={product.id}/>
             </td>
         </tr>
     );

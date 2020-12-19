@@ -174,3 +174,37 @@ export const updateProductAction = (postData, id) => async(dispatch) => {
     response.isLoading = false;
     dispatch({ type: Types.UPDATE_PRODUCT, payload: response });
 };
+
+
+export const deleteProductAction = (id) => async(dispatch) => {
+    let response = {
+        status: false,
+        message: "",
+        isLoading: true,
+        errors: [],
+        product: null
+    };
+    dispatch({ type: Types.DELETING, payload: true });
+    try {
+        await Axios.delete(`${process.env.REACT_APP_API_URL}products/${id}`)
+            .then((res) => {
+                const { data, message, status } = res.data;
+                response.status = status;
+                response.isLoading = false;
+                response.editing = false;
+                response.message = message;
+                response.product = data;
+                showToast('success', message);
+            })
+            .catch((err) => {
+                toast.error(err);
+                showToast('error', err);
+            });
+    } catch (error) {
+        response.message = 'Something Went Wrong !';
+        toast.error(error);
+    }
+
+    response.isLoading = false;
+    dispatch({ type: Types.DELETE_PRODUCT, payload: response });
+};

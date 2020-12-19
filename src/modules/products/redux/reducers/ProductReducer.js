@@ -86,6 +86,22 @@ const ProductReducer = (state = initialState, action) => {
                 isLoading: action.payload.isLoading,
             };
 
+        case Types.DELETE_PRODUCT:
+            // Remove that product from this list
+            const prodPaginatedData = {...state.productsPaginatedData };
+            const updateProductData = prodPaginatedData.data.splice(prodPaginatedData.data.findIndex(function(i) {
+                return i.id === action.payload.product.id;
+            }), 1);
+            prodPaginatedData.data = updateProductData;
+            return {
+                ...state,
+                deleteMessage: action.payload.message,
+                deleteStatus: action.payload.status,
+                deleting: action.payload.deleting,
+                isLoading: action.payload.isLoading,
+                productsPaginatedData: prodPaginatedData
+            };
+
         case Types.LOADING:
             return {
                 ...state,
