@@ -47,6 +47,7 @@ export const loginSubmitAction = (postData) => async(dispatch) => {
                 }
             })
             .catch((err) => {
+                console.log('err', err);
                 const message = JSON.parse(err.request.response).message;
                 response.message = message;
                 toast.error(message);
