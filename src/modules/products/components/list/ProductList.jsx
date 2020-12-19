@@ -16,7 +16,7 @@ const ProductList = () => {
 
     useEffect(() => {
         dispatch(getProductsAction(currentPage));
-    }, [dispatch]);
+    }, [dispatch, currentPage]);
 
     const changePage = (data) => {
         setCurrentPage(data.page);

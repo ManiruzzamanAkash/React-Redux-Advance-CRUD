@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Layout from '../../master/layouts/Layout';
 import ProductView from '../components/view/ProductView';
 

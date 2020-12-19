@@ -56,6 +56,7 @@ export const getProductsAction = (page, searchText = null) => async(dispatch) =>
                 const { data, message, status } = res.data;
                 response.status = status;
                 response.products = data.data;
+                response.message = message;
                 response.productsPaginatedData = data;
                 response.isLoading = false;
             })
@@ -120,17 +121,30 @@ export const storeNewProduct = (postData) => async(dispatch) => {
 
     try {
         await Axios.post(`${process.env.REACT_APP_API_URL}products`, formData)
-            .then((res) => {
-                const { data, message, status } = res.data;
-                response.status = status;
-                response.products = data.data;
-                response.isLoading = false;
-                response.message = message;
-                showToast('success', message);
+            .then(res => {
+                if (typeof res !== 'undefined') {
+                    const { data, message, status } = res.data;
+                    response.status = status;
+                    response.products = data.data;
+                    response.isLoading = false;
+                    response.message = message;
+                    showToast('success', message);
+                } else {
+                    showToast('error', 'Please check the file inputs and try again !');
+                }
             })
-            .catch((err) => {
-                toast.error(err);
-                showToast('error', err);
+            .catch(err => {
+                const errorsResponse = JSON.parse(err.request.response);
+                if (Object.entries(errorsResponse.errors)[0].length > 0) {
+                    const message = errorsResponse.message;
+                    response.message = message;
+                    response.errors = errorsResponse.errors;
+                    showToast('error', err);
+                } else {
+                    const message = JSON.parse(err.request.response).message;
+                    response.message = message;
+                    showToast('error', err);
+                }
             });
     } catch (error) {
         response.message = 'Something Went Wrong !';
@@ -153,18 +167,31 @@ export const updateProductAction = (postData, id) => async(dispatch) => {
     dispatch({ type: Types.EDITING, payload: true });
     try {
         await Axios.post(`${process.env.REACT_APP_API_URL}products/${id}?_method=PUT`, formData)
-            .then((res) => {
-                const { data, message, status } = res.data;
-                response.status = status;
-                response.products = data.data;
-                response.isLoading = false;
-                response.editing = false;
-                response.message = message;
-                showToast('success', message);
+            .then(res => {
+                if (typeof res !== 'undefined') {
+                    const { data, message, status } = res.data;
+                    response.status = status;
+                    response.products = data.data;
+                    response.isLoading = false;
+                    response.editing = false;
+                    response.message = message;
+                    showToast('success', message);
+                } else {
+                    showToast('error', 'Please check the file inputs and try again !');
+                }
             })
-            .catch((err) => {
-                toast.error(err);
-                showToast('error', err);
+            .catch(err => {
+                const errorsResponse = JSON.parse(err.request.response);
+                if (Object.entries(errorsResponse.errors)[0].length > 0) {
+                    const message = errorsResponse.message;
+                    response.message = message;
+                    response.errors = errorsResponse.errors;
+                    showToast('error', err);
+                } else {
+                    const message = JSON.parse(err.request.response).message;
+                    response.message = message;
+                    showToast('error', err);
+                }
             });
     } catch (error) {
         response.message = 'Something Went Wrong !';
@@ -197,7 +224,6 @@ export const deleteProductAction = (id) => async(dispatch) => {
                 showToast('success', message);
             })
             .catch((err) => {
-                toast.error(err);
                 showToast('error', err);
             });
     } catch (error) {

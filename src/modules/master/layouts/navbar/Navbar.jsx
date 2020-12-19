@@ -19,18 +19,18 @@ const Navbar = (props) => {
 
     useEffect(() => {
         dispatch(getAuthAction());
-        if (typeof loginMessage !== 'undefined' || loginMessage !== null) {
+        if (typeof loginMessage !== 'undefined' && loginMessage !== null && !isLoggedIn) {
             if (!isLoggedIn && loginMessage.length > 0) {
                 history.push("/auth/login");
             }
         }
         const { pathname } = history.location;
-        if(pathname !== '/auth/login' && pathname !== '/auth/sign-up' && pathname !== '/'){
+        if(pathname !== '/auth/login' && pathname !== '/auth/sign-up' && pathname !== '/' && !isLoggedIn){
             if(typeof authUserData === 'undefined' || authUserData === null ){
                 history.replace("/auth/login");
             }
         }
-    }, [isLoggedIn, loginMessage, history]);
+    }, [isLoggedIn, loginMessage, history, dispatch]);
 
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

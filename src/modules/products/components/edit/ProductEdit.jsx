@@ -43,7 +43,7 @@ const ProductEdit = ({ id }) => {
                 history.push("/products");
             }
         }
-    }, [editStatus, editMessage]);
+    }, [editStatus, editMessage, dispatch, history, id]);
     return (
 
         <>
@@ -106,7 +106,7 @@ const ProductEdit = ({ id }) => {
                             productEditData.imagePreviewUrl !== null &&
                             <div className="imgPreview" title="Remove">
                                 <div className="preview-delete-icon"><i className="fa fa-times text-danger" onClick={() => dispatch(deleteProductImagePreview())}></i></div>
-                                <img src={productEditData.imagePreviewUrl} className="img img-thumbnail" />
+                                <img src={productEditData.imagePreviewUrl} className="img img-thumbnail" alt=""/>
                             </div>
                         }
                     </Form.Group>

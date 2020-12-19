@@ -14,7 +14,7 @@ const ProductView = ({ id }) => {
 
     useEffect(() => {
         dispatch(getProductDetailAction(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     return (
         <>
@@ -27,8 +27,8 @@ const ProductView = ({ id }) => {
                 <div className="card">
                     <div className="row">
                         <div className="col-4">
-                            <img src={productDetail.image_url === null ? '/assets/img/products/no-image.png' : productDetail.image_url} class="img img-product-view" alt="" />
-                            <p class="card-text text-center">
+                            <img src={productDetail.image_url === null ? '/assets/img/products/no-image.png' : productDetail.image_url} className="img img-product-view" alt="" />
+                            <p className="card-text text-center">
                                 <strong>Uploaded at: </strong> {moment(productDetail.created_at).format("Do MMM YYYY HH:mm")}
                                 <br />
                                 <>
@@ -43,8 +43,8 @@ const ProductView = ({ id }) => {
                             </div>
                         </div>
                         <div className="col-8">
-                            <div class="card-body">
-                                <h2 class="card-title">{productDetail.title}</h2>
+                            <div className="card-body">
+                                <h2 className="card-title">{productDetail.title}</h2>
                                 <hr />
                                 <h3>
                                     <span className="product-price">
@@ -54,7 +54,7 @@ const ProductView = ({ id }) => {
                                     </span>
                                 </h3>
                                 <h5 className="mt-3">Details: </h5>
-                                <div class="card card-body card-text p-4">
+                                <div className="card card-body card-text p-4">
                                     {
                                         typeof productDetail.description != 'undefined' && productDetail.description !== null ?
                                             Parser(productDetail.description) : '...'

@@ -1,6 +1,6 @@
 import React from 'react'
 import swal from 'sweetalert';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteProductAction } from '../../redux/actions/ProductAction';
 
 const ProductDeleteModal = (props) => {
@@ -19,7 +19,6 @@ const ProductDeleteModal = (props) => {
 
         if (willDelete) {
             dispatch(deleteProductAction(id))
-            // swal("Deleted!", "Your imaginary file has been deleted!", "success");
         }
     }
 
