@@ -22,12 +22,13 @@ const ProductEdit = ({ id }) => {
     const history = useHistory();
 
     const isLoading = useSelector((state) => state.product.isLoading);
+    const editing = useSelector((state) => state.product.editing);
     const editStatus = useSelector((state) => state.product.editStatus);
     const editMessage = useSelector((state) => state.product.editMessage);
     const productData = useSelector((state) => state.product.productData);
 
     const submitHandler = (data) => {
-        dispatch(updateProductAction(productData))
+        dispatch(updateProductAction(productData, id))
     }
 
     const handleChangeTextInput = (name, value, e = null) => {
@@ -36,12 +37,12 @@ const ProductEdit = ({ id }) => {
 
     useEffect(() => {
         dispatch(getProductDetailAction(id, true));
-        if (typeof editStatus !== 'undefined' && editStatus === true && editMessage !== null && editMessage.length > 0) {
-            if (editStatus && editMessage.length > 0) {
-                dispatch(emptyProductMessage());
-                history.push("/products");
-            }
-        }
+        // if (typeof editStatus !== 'undefined' && editStatus === true && editMessage !== null && editMessage.length > 0) {
+        //     if (editStatus && editMessage.length > 0) {
+        //         dispatch(emptyProductMessage());
+        //         history.push("/products");
+        //     }
+        // }
     }, [editStatus, editMessage]);
     return (
 
@@ -110,10 +111,10 @@ const ProductEdit = ({ id }) => {
                         }
                     </Form.Group>
 
-                    {!isLoading && <Button variant="primary" type="submit"> Save </Button>}
+                    {!editing && <Button variant="primary" type="submit"> Save Product </Button>}
 
                     {
-                        isLoading &&
+                        editing &&
                         <Button variant="primary" type="button" disabled>
                             Saving Product... {"  "} <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         </Button>

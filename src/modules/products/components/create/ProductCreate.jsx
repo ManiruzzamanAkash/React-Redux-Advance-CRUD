@@ -102,7 +102,7 @@ const ProductCreate = () => {
                     }
                 </Form.Group>
 
-                {!isLoading && <Button variant="primary" type="submit"> Save </Button>}
+                {!isLoading && <Button variant="primary" type="submit"> Save Product </Button>}
 
                 {
                     isLoading &&

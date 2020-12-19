@@ -48,7 +48,7 @@ const ProductShortInfo = (props) => {
                 }
             </td>
             <td>
-                <p class="card-text text-center">
+                <p className="card-text text-center">
                     <strong>Time: </strong> {moment(product.created_at).format("Do MMM YYYY HH:mm")}
                     <br />
                     <>

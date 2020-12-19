@@ -87,6 +87,11 @@ export const getProductDetailAction = (product_id, isEdit = false) => async(disp
         await Axios.get(url)
             .then((res) => {
                 response.productDetail = res.data.data;
+                response.productDetail.image = null;
+                response.productDetail.imagePreviewUrl = res.data.data.image_url;
+                if (isEdit) {
+                    response.user = null;
+                }
                 response.isLoading = false;
             })
             .catch((err) => {
@@ -144,15 +149,15 @@ export const updateProductAction = (postData, id) => async(dispatch) => {
         errors: []
     };
     const formData = generateFormDataFromObject(postData);
-    dispatch({ type: Types.UPDATE_PRODUCT, payload: response });
-
+    dispatch({ type: Types.EDITING, payload: true });
     try {
-        await Axios.put(`${process.env.REACT_APP_API_URL}products/${id}`, formData)
+        await Axios.post(`${process.env.REACT_APP_API_URL}products/${id}?_method=PUT`, formData)
             .then((res) => {
                 const { data, message, status } = res.data;
                 response.status = status;
                 response.products = data.data;
                 response.isLoading = false;
+                response.editing = false;
                 response.message = message;
                 showToast('success', message);
             })

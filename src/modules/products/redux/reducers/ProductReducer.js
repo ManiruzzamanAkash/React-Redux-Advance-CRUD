@@ -17,7 +17,9 @@ const initialState = {
     errors: [],
     addStatus: false,
     editStatus: false,
+    editing: false,
     deleteStatus: false,
+    deleting: false,
 
     addMessage: '',
     editMessage: '',
@@ -64,6 +66,33 @@ const ProductReducer = (state = initialState, action) => {
                 addMessage: action.payload.message,
                 addStatus: action.payload.status,
                 isLoading: action.payload.isLoading,
+            };
+
+        case Types.UPDATE_PRODUCT:
+            return {
+                ...state,
+                editMessage: action.payload.message,
+                editStatus: action.payload.status,
+                editing: action.payload.editing,
+                isLoading: action.payload.isLoading,
+            };
+
+        case Types.LOADING:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
+
+        case Types.EDITING:
+            return {
+                ...state,
+                editing: action.payload,
+            };
+
+        case Types.DELETING:
+            return {
+                ...state,
+                deleting: action.payload,
             };
 
         case Types.EMPTY_PRODUCT_MESSAGE:

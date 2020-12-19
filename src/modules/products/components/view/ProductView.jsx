@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import Parser from 'html-react-parser';
 import LoadingSpinner from '../../../master/components/loading/LoadingSpinner';
