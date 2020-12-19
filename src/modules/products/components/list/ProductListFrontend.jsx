@@ -3,35 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from '../../../master/components/loading/LoadingSpinner';
 import PaginationLaravel from '../../../master/components/pagination/PaginationLaravel';
 import { getProductsAction } from '../../redux/actions/ProductAction';
-import ProductShortInfo from './ProductShortInfo';
 import ProductShortInfoFrontend from './ProductShortInfoFrontend';
 
 const ProductListFrontend = () => {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const [searchText, setSearchText] = useState('');
 
     const isLoading = useSelector((state) => state.product.isLoading);
     const products = useSelector((state) => state.product.products);
     const productsPaginatedData = useSelector((state) => state.product.productsPaginatedData);
 
     useEffect(() => {
-        dispatch(getProductsAction(currentPage));
+        dispatch(getProductsAction(currentPage, null, true));
     }, [dispatch, currentPage]);
 
     const changePage = (data) => {
         setCurrentPage(data.page);
         dispatch(getProductsAction(data.page));
-    }
-
-    const searchProduct = (e) => {
-        const searchText = e.target.value;
-        setSearchText(searchText)
-        if (searchText.length === 0) {
-            dispatch(getProductsAction(currentPage));
-        } else {
-            dispatch(getProductsAction(currentPage, searchText));
-        }
     }
 
     return (

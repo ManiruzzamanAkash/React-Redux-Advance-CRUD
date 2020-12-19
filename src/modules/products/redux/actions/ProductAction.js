@@ -34,7 +34,7 @@ export const deleteProductImagePreview = () => (dispatch) => {
     dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
 };
 
-export const getProductsAction = (page, searchText = null) => async(dispatch) => {
+export const getProductsAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
     let response = {
         products: [],
         status: false,
@@ -44,8 +44,10 @@ export const getProductsAction = (page, searchText = null) => async(dispatch) =>
     };
     dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
     let url = '';
+    url = isPublic ? `${process.env.REACT_APP_API_URL}products/view/all` : `${process.env.REACT_APP_API_URL}products`;
+
     if (searchText === null) {
-        url = `${process.env.REACT_APP_API_URL}products/view/all?page=${page}`;
+        url = `${url}?page=${page}`;
     } else {
         url = `${process.env.REACT_APP_API_URL}products/view/search?search=${searchText}`
     }

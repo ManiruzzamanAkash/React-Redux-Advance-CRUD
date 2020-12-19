@@ -12,7 +12,7 @@ const ProductListContainer = () => {
         <Layout sidebar={true} dashboard={true}>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">
-                    Products {' '}
+                    My Products {' '}
                     {
                         products != null && 
                         <span className="badge badge-info badge-pill">{products.total}</span>

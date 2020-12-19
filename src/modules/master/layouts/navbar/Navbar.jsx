@@ -67,8 +67,8 @@ const Navbar = (props) => {
                     {
                         dashboard === false &&
                         <Link to="/auth/login" className="nav-link">
-                            <span className="btn btn-info btn-sm">
-                                User Login <i className="fas fa-sign-out-alt fa-fw"></i>
+                            <span className="btn btn-primary btn-sm">
+                                Login Now & Manage Products <i className="fas fa-sign-out-alt fa-fw"></i>
                             </span>
                         </Link>
                     }
