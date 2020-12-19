@@ -19,21 +19,26 @@ import { Provider } from "react-redux";
 import Store from "./redux/Store";
 
 // Import axios.js so that it can inject token in every request
-// require ('./services/axios');
+require('./services/axios');
 
 toast.configure();
 
 // Import Local storage to get access tokens
 // const localStorageService = LocalStorageService.getService();
 
-ReactDOM.render(
-  <Provider store={Store}>
-    <HttpsRedirect>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-    </HttpsRedirect>
-    <ToastContainer />
-  </Provider>,
-  document.getElementById("root")
+ReactDOM.render( <
+    Provider store = { Store } >
+    <
+    HttpsRedirect >
+    <
+    BrowserRouter >
+    <
+    App / >
+    <
+    /BrowserRouter> <
+    /HttpsRedirect> <
+    ToastContainer / >
+    <
+    /Provider>,
+    document.getElementById("root")
 );

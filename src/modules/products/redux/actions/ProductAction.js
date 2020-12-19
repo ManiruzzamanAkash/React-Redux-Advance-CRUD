@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { toast } from 'react-toastify';
+import { generateFormDataFromObject } from "../../../master/utils/FileHelper";
 
 import * as Types from "../types/Types";
 
@@ -69,10 +70,11 @@ export const storeNewProduct = (postData) => async(dispatch) => {
         isLoading: true,
         errors: []
     };
+    const formData = generateFormDataFromObject(postData);
     dispatch({ type: Types.CREATE_PRODUCT, payload: response });
 
     try {
-        await Axios.post(`${process.env.REACT_APP_API_URL}products`, postData)
+        await Axios.post(`${process.env.REACT_APP_API_URL}products`, formData)
             .then((res) => {
                 const { data, message, status } = res.data;
                 response.status = status;

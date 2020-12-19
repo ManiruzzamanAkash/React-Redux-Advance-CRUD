@@ -23,7 +23,6 @@ const ProductCreate = () => {
     const inputData = useSelector((state) => state.product.inputData);
 
     const submitHandler = (data) => {
-        console.log('object :>> ', data);
         dispatch(storeNewProduct(inputData))
     }
 
