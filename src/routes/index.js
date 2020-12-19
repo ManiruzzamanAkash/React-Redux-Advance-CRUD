@@ -1,5 +1,6 @@
 import LoginContainer from "../modules/auth/views/LoginContainer";
 import RegisterContainer from "../modules/auth/views/RegisterContainer";
+import CustomPageContainer from "../modules/custom/views/CustomPageContainer";
 import DashboardContainer from "../modules/master/views/DashboardContainer";
 import DefaultContainer from "../modules/master/views/DefaultContainer";
 import ProductCreateContainer from "../modules/products/views/ProductCreateContainer";
@@ -29,6 +30,14 @@ const routes = [{
         path: "/",
         name: "Default Home Component",
         component: DefaultContainer,
+        exact: true,
+    },
+
+    // Custom Page
+    {
+        path: "/page",
+        name: "Custom Page Component",
+        component: CustomPageContainer,
         exact: true,
     },
 
