@@ -65,6 +65,7 @@ const ProductList = () => {
                                     <th className='td-product-title'>Product</th>
                                     <th>Price</th>
                                     <th className='td-description'>Description</th>
+                                    <th className='td-upload-info'>Upload Information</th>
                                     <th className='td-action'>Action</th>
                                 </tr>
                             </thead>

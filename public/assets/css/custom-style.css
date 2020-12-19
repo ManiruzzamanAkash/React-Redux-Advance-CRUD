@@ -33,7 +33,7 @@
 }
 
 .td-product-title {
-    width: 15%;
+    width: 25%;
 }
 
 .td-action {
@@ -41,7 +41,11 @@
 }
 
 .td-description {
-    width: 50%;
+    width: 25%;
+}
+
+.td-upload-info {
+    width: 25%;
 }
 
 .imgPreview {

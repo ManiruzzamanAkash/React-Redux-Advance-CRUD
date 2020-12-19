@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { StripHTMLText } from '../../../master/utils/StringHelper';
+import moment from 'moment';
 const currencyFormatter = require('currency-formatter');
 
 const ProductShortInfo = (props) => {
     const [isShortText, setIsShortText] = useState(true);
     const { index, product } = props;
 
-    return ( 
+    return (
         <tr key={index}>
             <td>{index + 1}</td>
             <td>
@@ -19,10 +20,10 @@ const ProductShortInfo = (props) => {
                 }
             </td>
             <td>
-                <strong className="text-warning" style={{ fontFamily: 'math'}}>
-                {
-                    currencyFormatter.format(product.price, { code: 'BDT' })
-                }
+                <strong className="text-warning" style={{ fontFamily: 'math' }}>
+                    {
+                        currencyFormatter.format(product.price, { code: 'BDT' })
+                    }
                 </strong>
             </td>
             <td>
@@ -47,6 +48,16 @@ const ProductShortInfo = (props) => {
                 }
             </td>
             <td>
+                <p class="card-text text-center">
+                    <strong>Time: </strong> {moment(product.created_at).format("Do MMM YYYY HH:mm")}
+                    <br />
+                    <>
+                        <strong>By: </strong>
+                        <span className="badge badge-info">{product.user.name}</span>
+                    </>
+                </p>
+            </td>
+            <td>
                 <Link to={`/products/view/${product.id}`} title="Product Detail">
                     <i className="fa fa-eye text-info"></i>
                 </Link>
@@ -58,7 +69,7 @@ const ProductShortInfo = (props) => {
                 </button>
             </td>
         </tr>
-     );
+    );
 }
- 
+
 export default ProductShortInfo;
