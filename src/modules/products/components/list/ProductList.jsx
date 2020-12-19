@@ -32,10 +32,10 @@ const ProductList = () => {
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Sl</th>
+                                <th className='td-sl'>Sl</th>
                                 <th className='td-product-title'>Product</th>
                                 <th>Price</th>
-                                <th>Description</th>
+                                <th className='td-description'>Description</th>
                                 <th className='td-action'>Action</th>
                             </tr>
                         </thead>
