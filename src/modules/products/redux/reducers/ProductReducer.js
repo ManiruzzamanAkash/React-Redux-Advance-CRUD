@@ -5,10 +5,12 @@ const initialState = {
     products: [],
     isLoading: false,
     inputData: {
+        id: 0,
         title: '',
         description: '',
         price: '',
-        image: ''
+        image: null,
+        imagePreviewUrl: null
     },
     errors: [],
     addStatus: false,

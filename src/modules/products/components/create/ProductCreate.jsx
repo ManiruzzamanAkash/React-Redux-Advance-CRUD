@@ -1,98 +1,116 @@
 import React, { useEffect } from 'react';
-import { useForm } from "react-hook-form";
-import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { getAuthAction, handleChangeLoginInput, loginSubmitAction } from '../../redux/actions/AuthAction';
+import { Form, Col, Button } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { deleteProductImagePreview, handleChangeProductInputAction, storeNewProduct } from '../../redux/actions/ProductAction';
+import SimpleEditor from '../../../master/components/text-editor/SimpleEditor';
 
-const ProductCreate = withRouter(({history}) => {
-    const { register, handleSubmit, errors } = useForm();
+const ProductCreateSchema = yup.object().shape({
+    title: yup.string().required('Please give product title'),
+    price: yup.number('Please give product price').required('Please give product price').positive('Please give a positive price'),
+    // description: yup.string().required('Please give product description')
+});
+
+const ProductCreate = () => {
+    const { register, handleSubmit, errors } = useForm({
+        resolver: yupResolver(ProductCreateSchema)
+    });
     const dispatch = useDispatch();
 
-    const isLoading = useSelector((state) => state.auth.isLoading);
-    const loginMessage = useSelector((state) => state.auth.loginMessage);
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-    const loginData = useSelector((state) => state.auth.loginData);
-    const authUserData = useSelector((state) => state.auth.authUserData);
+    const isLoading = useSelector((state) => state.product.isLoading);
+    const inputData = useSelector((state) => state.product.inputData);
 
-    const submitHandler = () => {
-        dispatch(loginSubmitAction(loginData));
+    const submitHandler = (data) => {
+        console.log('object :>> ', data);
+        dispatch(storeNewProduct(inputData))
     }
 
-    const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeLoginInput(name, value));
+    const handleChangeTextInput = (name, value, e=null) => {
+        dispatch(handleChangeProductInputAction(name, value, e));
     };
 
     useEffect(() => {
-        dispatch(getAuthAction());
-        if (typeof loginMessage !== 'undefined' || loginMessage !== null) {
-            if (isLoggedIn && loginMessage.length > 0) {
-                history.replace("/dashboard");
-            }
-        }
-        if(history.location.pathname === '/auth/login'){
-            if(typeof authUserData !== 'undefined' && authUserData !== null ){
-                history.replace("/dashboard");
-            }
-        }
-    }, [isLoggedIn, loginMessage, history, authUserData, dispatch]);
+        // if(history.location.pathname === '/auth/login'){
+        //     if(typeof authUserData !== 'undefined' && authUserData !== null ){
+        //         history.replace("/dashboard");
+        //     }
+        // }
+    }, []);
     return (
-        <form className="user" onSubmit={handleSubmit(submitHandler)} method="POST">
-            <div className="form-group">
-                <input className="form-control form-control-user"
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Enter Email Address..."
-                    required=""
-                    aria-required="true"
-                    ref={register({
-                        required: 'Please give your email'
-                    })}
-                    onChange={(e) => handleChangeTextInput('email', e.target.value)}
-                    value={loginData.email}
-                    autoComplete="name"
-                />
-                {
-                    errors.email &&
-                    <div className="text-danger text-sm ml-4">{errors.email.message}</div>
-                }
-            </div>
-            <div className="form-group">
-                <input className="form-control form-control-user"
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter Password"
-                    required=""
-                    aria-required="true"
-                    ref={register({
-                        required: 'Please give your password'
-                    })}
-                    onChange={(e) => handleChangeTextInput('password', e.target.value)}
-                    value={loginData.password}
-                    autoComplete="name"
-                />
-                {
-                    errors.password &&
-                    <div className="text-danger text-sm ml-4">{errors.password.message}</div>
-                }
-            </div>
+        <>
+            <Form
+                onSubmit={handleSubmit(submitHandler)}
+                method="POST"
+                encType="multipart/form-data"
+            >
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Label>Title <span className="text-danger text-sm">*</span></Form.Label>
+                        <Form.Control
+                            onChange={(e) => handleChangeTextInput('title', e.target.value)}
+                            value={inputData.title}
+                            required=""
+                            name="title"
+                            placeholder="Enter Product Title"
+                            ref={register}
+                        />
+                        {errors.title && <div className="text-danger text-sm">{errors.title.message}</div>}
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formGridZip">
+                        <Form.Label>Price <span className="text-danger text-sm">*</span></Form.Label>
+                        <Form.Control
+                            type="number"
+                            onChange={(e) => handleChangeTextInput('price', e.target.value)}
+                            value={inputData.price}
+                            required=""
+                            name="price"
+                            placeholder="Enter Product Price"
+                            ref={register}
+                        />
+                        {errors.price && <div className="text-danger text-sm">{errors.price.message}</div>}
+                    </Form.Group>
+                </Form.Row>
 
-            {
-                !isLoading && 
-                <button className="btn btn-primary btn-user btn-block" type="submit">
-                    Login
-                </button>
-            }
-            {
-                isLoading && 
-                <button className="btn btn-primary btn-user btn-block" type="button" disabled>
-                    Logging In {"  "}
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                </button>
-            }
-        </form>
+                <Form.Group controlId="formGridAddress2">
+                    <Form.Label>Description <span className="text-info text-sm">(Optional)</span></Form.Label>
+                    <SimpleEditor
+                        value={inputData.description}
+                        onValueChange={(e) => handleChangeTextInput('description', e)}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formGridCity">
+                    <Form.Label>Image <span className="text-info text-sm">(Optional)</span></Form.Label>
+                    <Form.Control
+                        type="file"
+                        name="image"
+                        onChange={(e) => handleChangeTextInput('image', e.target.files[0], e)}
+                        className="fromStyle"
+                        ref={register}
+                    />
+                    {
+                        inputData.imagePreviewUrl !== null &&
+                        <div className="imgPreview" title="Remove">
+                            <div className="preview-delete-icon"><i className="fa fa-times text-danger" onClick={() => dispatch(deleteProductImagePreview())}></i></div>
+                            <img src={inputData.imagePreviewUrl} className="img img-thumbnail" />
+                        </div>
+                    }
+                </Form.Group>
+
+                {!isLoading && <Button variant="primary" type="submit"> Save </Button>}
+
+                {
+                    isLoading &&
+                    <Button variant="primary" type="button" disabled>
+                        Saving Product... {"  "} <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    </Button>
+                }
+            </Form>
+
+
+        </>
     );
-})
+}
 
 export default ProductCreate;

@@ -3,10 +3,30 @@ import { toast } from 'react-toastify';
 
 import * as Types from "../types/Types";
 
-export const handleChangeProductInputAction = (name, value) => (dispatch) => {
+export const handleChangeProductInputAction = (name, value, e) => (dispatch) => {
     let data = {
         name: name,
         value: value,
+    }
+    dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
+
+    if (name === 'image') {
+        let reader = new FileReader();
+        const file = e.target.files[0];
+        reader.onloadend = () => {
+            data.name = 'imagePreviewUrl';
+            data.value = reader.result;
+            dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
+        }
+        reader.readAsDataURL(file)
+    }
+
+};
+
+export const deleteProductImagePreview = () => (dispatch) => {
+    let data = {
+        name: 'imagePreviewUrl',
+        value: null,
     }
     dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
 };

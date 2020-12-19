@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../../master/layouts/Layout';
+import ProductCreate from '../components/create/ProductCreate';
 
 const ProductCreateContainer = () => {
     return (
@@ -12,7 +13,7 @@ const ProductCreateContainer = () => {
                     <i className="fas fa-arrow-left fa-sm text-white-50"></i> Product List
                 </Link>
             </div>
-           
+            <ProductCreate />
         </Layout>
     );
 }
