@@ -4,6 +4,7 @@ import Parser from 'html-react-parser';
 import LoadingSpinner from '../../../master/components/loading/LoadingSpinner';
 import { getProductDetailAction } from '../../redux/actions/ProductAction';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 const currencyFormatter = require('currency-formatter');
 
 const ProductView = ({ id }) => {
@@ -26,7 +27,7 @@ const ProductView = ({ id }) => {
                 <div className="card">
                     <div className="row">
                         <div className="col-4">
-                            <img src={productDetail.image_url} class="img img-product-view" alt="" />
+                            <img src={productDetail.image_url === null ? '/assets/img/products/no-image.png' : productDetail.image_url} class="img img-product-view" alt="" />
                             <p class="card-text text-center">
                                 <strong>Uploaded at: </strong> {moment(productDetail.created_at).format("Do MMM YYYY HH:mm")}
                                 <br />
@@ -35,6 +36,11 @@ const ProductView = ({ id }) => {
                                     <span className="badge badge-info">{productDetail.user.name}</span>
                                 </>
                             </p>
+                            <div className="text-center mb-2">
+                                <Link to={`/products/edit/${id}`} className="btn btn-sm btn-primary shadow-sm">
+                                    <i className="fas fa-edit fa-sm text-white-50"></i> Edit Now
+                            </Link>
+                            </div>
                         </div>
                         <div className="col-8">
                             <div class="card-body">
@@ -49,7 +55,10 @@ const ProductView = ({ id }) => {
                                 </h3>
                                 <h5 className="mt-3">Details: </h5>
                                 <div class="card card-body card-text p-4">
-                                    {Parser(productDetail.description)}
+                                    {
+                                        typeof productDetail.description != 'undefined' && productDetail.description !== null ?
+                                            Parser(productDetail.description) : '...'
+                                    }
                                 </div>
 
                             </div>
