@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-// import { Pagination } from 'react-laravel-paginex'
 import LoadingSpinner from '../../../master/components/loading/LoadingSpinner';
 import PaginationLaravel from '../../../master/components/pagination/PaginationLaravel';
 import { getProductsAction } from '../../redux/actions/ProductAction';
 import ProductShortInfo from './ProductShortInfo';
-// const Paginator = require('react-laravel-paginator');
-
 
 const ProductList = () => {
     const dispatch = useDispatch();
