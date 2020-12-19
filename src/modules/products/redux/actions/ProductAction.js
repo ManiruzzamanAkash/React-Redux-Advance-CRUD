@@ -33,7 +33,7 @@ export const deleteProductImagePreview = () => (dispatch) => {
     dispatch({ type: Types.CHANGE_PRODUCT_INPUT, payload: data });
 };
 
-export const getProductsAction = (page) => async(dispatch) => {
+export const getProductsAction = (page, searchText = null) => async(dispatch) => {
     let response = {
         products: [],
         status: false,
@@ -42,9 +42,15 @@ export const getProductsAction = (page) => async(dispatch) => {
         errors: []
     };
     dispatch({ type: Types.PRODUCT_LIST_DASHBOARD, payload: response });
+    let url = '';
+    if (searchText === null) {
+        url = `${process.env.REACT_APP_API_URL}products/view/all?page=${page}`;
+    } else {
+        url = `${process.env.REACT_APP_API_URL}products/view/search?search=${searchText}`
+    }
 
     try {
-        await Axios.get(`${process.env.REACT_APP_API_URL}products/view/all?page=${page}`)
+        await Axios.get(url)
             .then((res) => {
                 const { data, message, status } = res.data;
                 response.status = status;
