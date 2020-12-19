@@ -74,6 +74,8 @@
 .imgPreview {
     margin-top: 5px;
     width: 150px;
+    min-height: 100px;
+    border: 1px dotted #375dcd;
 }
 
 .preview-delete-icon {

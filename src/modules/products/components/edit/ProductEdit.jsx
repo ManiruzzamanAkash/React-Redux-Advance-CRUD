@@ -26,8 +26,10 @@ const ProductEdit = ({ id }) => {
     const editStatus = useSelector((state) => state.product.editStatus);
     const editMessage = useSelector((state) => state.product.editMessage);
     const productEditData = useSelector((state) => state.product.productEditData);
+    const serverErrors = useSelector((state) => state.product.errors);
 
-    const submitHandler = (data) => {
+
+    const submitHandler = () => {
         dispatch(updateProductAction(productEditData, id))
     }
 
@@ -94,7 +96,12 @@ const ProductEdit = ({ id }) => {
                         />
                     </Form.Group>
                     <Form.Group controlId="formGridCity">
-                        <Form.Label>Image <span className="text-info text-sm">(Optional)</span></Form.Label>
+                        <Form.Label>
+                            Image <span className="text-info text-sm">(Optional) </span>
+                            <small className="bg-warning text-white pl-3 pr-3">
+                                Allowed Format: png, jpg, jpeg, gif, webp
+                            </small>
+                        </Form.Label>
                         <Form.Control
                             type="file"
                             name="image"
@@ -102,11 +109,18 @@ const ProductEdit = ({ id }) => {
                             className="fromStyle"
                             ref={register}
                         />
+                        {serverErrors['image'] &&
+                            <div className="text-danger text-sm">
+                                {serverErrors['image'].map((error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </div>
+                        }
                         {
                             productEditData.imagePreviewUrl !== null &&
                             <div className="imgPreview" title="Remove">
                                 <div className="preview-delete-icon"><i className="fa fa-times text-danger" onClick={() => dispatch(deleteProductImagePreview())}></i></div>
-                                <img src={productEditData.imagePreviewUrl} className="img img-thumbnail" alt=""/>
+                                <img src={productEditData.imagePreviewUrl} className="img img-thumbnail" alt="" />
                             </div>
                         }
                     </Form.Group>
@@ -120,7 +134,7 @@ const ProductEdit = ({ id }) => {
                         </Button>
                     }
                     <Link className="btn btn-secondary ml-2" to="/products">
-                       <i className="fa fa-times"></i> Cancel
+                        <i className="fa fa-times"></i> Cancel
                     </Link>
                 </Form>
             }

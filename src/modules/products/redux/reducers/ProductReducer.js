@@ -75,6 +75,7 @@ const ProductReducer = (state = initialState, action) => {
                 addMessage: action.payload.message,
                 addStatus: action.payload.status,
                 isLoading: action.payload.isLoading,
+                errors: action.payload.errors,
             };
 
         case Types.UPDATE_PRODUCT:
@@ -84,6 +85,7 @@ const ProductReducer = (state = initialState, action) => {
                 editStatus: action.payload.status,
                 editing: action.payload.editing,
                 isLoading: action.payload.isLoading,
+                errors: action.payload.errors,
             };
 
         case Types.DELETE_PRODUCT:

@@ -25,6 +25,7 @@ const ProductCreate = () => {
     const addStatus = useSelector((state) => state.product.addStatus);
     const addMessage = useSelector((state) => state.product.addMessage);
     const productData = useSelector((state) => state.product.productData);
+    const serverErrors = useSelector((state) => state.product.errors);
 
     const submitHandler = (data) => {
         dispatch(storeNewProduct(productData))
@@ -85,7 +86,12 @@ const ProductCreate = () => {
                     />
                 </Form.Group>
                 <Form.Group controlId="formGridCity">
-                    <Form.Label>Image <span className="text-info text-sm">(Optional)</span></Form.Label>
+                    <Form.Label>
+                        Image <span className="text-info text-sm">(Optional) </span>
+                        <small className="bg-warning text-white pl-3 pr-3">
+                            Allowed Format: png, jpg, jpeg, gif, webp
+                        </small>
+                    </Form.Label>
                     <Form.Control
                         type="file"
                         name="image"
@@ -93,6 +99,13 @@ const ProductCreate = () => {
                         className="fromStyle"
                         ref={register}
                     />
+                    {serverErrors['image'] && 
+                        <div className="text-danger text-sm">
+                            { serverErrors['image'].map((error, index) => (
+                                    <li key={index}>{error}</li>
+                            ))}
+                        </div>
+                    }
                     {
                         productData.imagePreviewUrl !== null &&
                         <div className="imgPreview" title="Remove">

@@ -137,16 +137,10 @@ export const storeNewProduct = (postData) => async(dispatch) => {
             })
             .catch(err => {
                 const errorsResponse = JSON.parse(err.request.response);
-                if (Object.entries(errorsResponse.errors)[0].length > 0) {
-                    const message = errorsResponse.message;
-                    response.message = message;
-                    response.errors = errorsResponse.errors;
-                    showToast('error', err);
-                } else {
-                    const message = JSON.parse(err.request.response).message;
-                    response.message = message;
-                    showToast('error', err);
-                }
+                const message = errorsResponse.message;
+                response.message = message;
+                response.errors = errorsResponse.errors;
+                showToast('error', message);
             });
     } catch (error) {
         response.message = 'Something Went Wrong !';
@@ -184,16 +178,10 @@ export const updateProductAction = (postData, id) => async(dispatch) => {
             })
             .catch(err => {
                 const errorsResponse = JSON.parse(err.request.response);
-                if (Object.entries(errorsResponse.errors)[0].length > 0) {
-                    const message = errorsResponse.message;
-                    response.message = message;
-                    response.errors = errorsResponse.errors;
-                    showToast('error', err);
-                } else {
-                    const message = JSON.parse(err.request.response).message;
-                    response.message = message;
-                    showToast('error', err);
-                }
+                const message = errorsResponse.message;
+                response.message = message;
+                response.errors = errorsResponse.errors;
+                showToast('error', message);
             });
     } catch (error) {
         response.message = 'Something Went Wrong !';
