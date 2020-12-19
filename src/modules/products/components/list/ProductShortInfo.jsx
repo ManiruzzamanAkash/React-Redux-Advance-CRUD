@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { StripHTMLText } from '../../../master/utils/StringHelper';
+const currencyFormatter = require('currency-formatter');
 
 const ProductShortInfo = (props) => {
     const [isShortText, setIsShortText] = useState(true);
@@ -18,7 +19,11 @@ const ProductShortInfo = (props) => {
                 }
             </td>
             <td>
-                <strong>{product.price} ৳</strong>
+                <strong className="text-warning" style={{ fontFamily: 'math'}}>
+                {
+                    currencyFormatter.format(product.price, { code: 'BDT' })
+                }
+                </strong>
             </td>
             <td>
                 {

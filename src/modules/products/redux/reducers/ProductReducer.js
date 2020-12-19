@@ -5,7 +5,7 @@ const initialState = {
     products: [],
     productsPaginatedData: null,
     isLoading: false,
-    inputData: {
+    productData: {
         id: 0,
         title: '',
         description: '',
@@ -13,6 +13,7 @@ const initialState = {
         image: null,
         imagePreviewUrl: null
     },
+    productDetail: null,
     errors: [],
     addStatus: false,
     editStatus: false,
@@ -36,11 +37,18 @@ const ProductReducer = (state = initialState, action) => {
             };
 
         case Types.CHANGE_PRODUCT_INPUT:
-            const inputData = {...state.inputData };
-            inputData[action.payload.name] = action.payload.value;
+            const productData = {...state.productData };
+            productData[action.payload.name] = action.payload.value;
             return {
                 ...state,
-                inputData
+                productData
+            };
+
+        case Types.PRODUCT_DETAIL:
+            return {
+                ...state,
+                productDetail: action.payload.productDetail,
+                isLoading: action.payload.isLoading,
             };
 
         case Types.CREATE_PRODUCT:
@@ -57,7 +65,7 @@ const ProductReducer = (state = initialState, action) => {
                 addMessage: null,
                 editMessage: null,
                 deleteMessage: null,
-                inputData: {
+                productData: {
                     id: 0,
                     title: '',
                     description: '',

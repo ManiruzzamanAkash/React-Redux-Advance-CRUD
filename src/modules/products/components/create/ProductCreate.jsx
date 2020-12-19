@@ -24,13 +24,13 @@ const ProductCreate = () => {
     const isLoading = useSelector((state) => state.product.isLoading);
     const addStatus = useSelector((state) => state.product.addStatus);
     const addMessage = useSelector((state) => state.product.addMessage);
-    const inputData = useSelector((state) => state.product.inputData);
+    const productData = useSelector((state) => state.product.productData);
 
     console.log('addStatus :>> ', addStatus);
     console.log('addMessage :>> ', addMessage);
 
     const submitHandler = (data) => {
-        dispatch(storeNewProduct(inputData))
+        dispatch(storeNewProduct(productData))
     }
 
     const handleChangeTextInput = (name, value, e=null) => {
@@ -62,7 +62,7 @@ const ProductCreate = () => {
                         <Form.Label>Title <span className="text-danger text-sm">*</span></Form.Label>
                         <Form.Control
                             onChange={(e) => handleChangeTextInput('title', e.target.value)}
-                            value={inputData.title}
+                            value={productData.title}
                             required=""
                             name="title"
                             placeholder="Enter Product Title"
@@ -75,7 +75,7 @@ const ProductCreate = () => {
                         <Form.Control
                             type="number"
                             onChange={(e) => handleChangeTextInput('price', e.target.value)}
-                            value={inputData.price}
+                            value={productData.price}
                             required=""
                             name="price"
                             placeholder="Enter Product Price"
@@ -88,7 +88,7 @@ const ProductCreate = () => {
                 <Form.Group controlId="formGridAddress2">
                     <Form.Label>Description <span className="text-info text-sm">(Optional)</span></Form.Label>
                     <SimpleEditor
-                        value={inputData.description}
+                        value={productData.description}
                         onValueChange={(e) => handleChangeTextInput('description', e)}
                     />
                 </Form.Group>
@@ -102,10 +102,10 @@ const ProductCreate = () => {
                         ref={register}
                     />
                     {
-                        inputData.imagePreviewUrl !== null &&
+                        productData.imagePreviewUrl !== null &&
                         <div className="imgPreview" title="Remove">
                             <div className="preview-delete-icon"><i className="fa fa-times text-danger" onClick={() => dispatch(deleteProductImagePreview())}></i></div>
-                            <img src={inputData.imagePreviewUrl} className="img img-thumbnail" />
+                            <img src={productData.imagePreviewUrl} className="img img-thumbnail" />
                         </div>
                     }
                 </Form.Group>

@@ -74,6 +74,33 @@ export const emptyProductMessage = () => (dispatch) => {
     dispatch({ type: Types.EMPTY_PRODUCT_MESSAGE, payload: null });
 };
 
+
+export const getProductDetailAction = (product_id) => async(dispatch) => {
+    let response = {
+        isLoading: true,
+        productDetail: null
+    };
+    dispatch({ type: Types.PRODUCT_DETAIL, payload: response });
+    const url = `${process.env.REACT_APP_API_URL}products/${product_id}`
+
+    try {
+        await Axios.get(url)
+            .then((res) => {
+                response.productDetail = res.data.data;
+                response.isLoading = false;
+            })
+            .catch((err) => {
+                toast.error(err);
+            });
+    } catch (error) {
+        response.message = 'Something Went Wrong !';
+        toast.error(error);
+    }
+
+    response.isLoading = false;
+    dispatch({ type: Types.PRODUCT_DETAIL, payload: response });
+};
+
 export const storeNewProduct = (postData) => async(dispatch) => {
     let response = {
         products: [],

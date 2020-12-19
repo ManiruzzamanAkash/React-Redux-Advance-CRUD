@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Layout from '../../master/layouts/Layout';
+import ProductView from '../components/view/ProductView';
 
-const ProductViewContainer = () => {
+const ProductViewContainer = (props) => {
     return (
         <Layout sidebar={true} dashboard={true}>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
@@ -12,7 +13,7 @@ const ProductViewContainer = () => {
                     <i className="fas fa-arrow-left fa-sm text-white-50"></i> Product List
                 </Link>
             </div>
-           
+           <ProductView id={props.match.params.id} />
         </Layout>
     );
 }
