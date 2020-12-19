@@ -75,12 +75,12 @@ export const emptyProductMessage = () => (dispatch) => {
 };
 
 
-export const getProductDetailAction = (product_id) => async(dispatch) => {
+export const getProductDetailAction = (product_id, isEdit = false) => async(dispatch) => {
     let response = {
         isLoading: true,
         productDetail: null
     };
-    dispatch({ type: Types.PRODUCT_DETAIL, payload: response });
+    dispatch({ type: !isEdit ? Types.PRODUCT_DETAIL : Types.EDIT_PRODUCT_INFO, payload: response });
     const url = `${process.env.REACT_APP_API_URL}products/${product_id}`
 
     try {
@@ -98,7 +98,7 @@ export const getProductDetailAction = (product_id) => async(dispatch) => {
     }
 
     response.isLoading = false;
-    dispatch({ type: Types.PRODUCT_DETAIL, payload: response });
+    dispatch({ type: !isEdit ? Types.PRODUCT_DETAIL : Types.EDIT_PRODUCT_INFO, payload: response });
 };
 
 export const storeNewProduct = (postData) => async(dispatch) => {
@@ -133,4 +133,38 @@ export const storeNewProduct = (postData) => async(dispatch) => {
 
     response.isLoading = false;
     dispatch({ type: Types.CREATE_PRODUCT, payload: response });
+};
+
+export const updateProductAction = (postData, id) => async(dispatch) => {
+    let response = {
+        products: [],
+        status: false,
+        message: "",
+        isLoading: true,
+        errors: []
+    };
+    const formData = generateFormDataFromObject(postData);
+    dispatch({ type: Types.UPDATE_PRODUCT, payload: response });
+
+    try {
+        await Axios.put(`${process.env.REACT_APP_API_URL}products/${id}`, formData)
+            .then((res) => {
+                const { data, message, status } = res.data;
+                response.status = status;
+                response.products = data.data;
+                response.isLoading = false;
+                response.message = message;
+                showToast('success', message);
+            })
+            .catch((err) => {
+                toast.error(err);
+                showToast('error', err);
+            });
+    } catch (error) {
+        response.message = 'Something Went Wrong !';
+        toast.error(error);
+    }
+
+    response.isLoading = false;
+    dispatch({ type: Types.UPDATE_PRODUCT, payload: response });
 };

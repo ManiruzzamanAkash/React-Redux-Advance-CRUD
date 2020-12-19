@@ -15,8 +15,6 @@ const ProductView = ({ id }) => {
         dispatch(getProductDetailAction(id));
     }, [dispatch]);
 
-    console.log('productDetail :>> ', productDetail);
-
     return (
         <>
             {

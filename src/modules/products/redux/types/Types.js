@@ -7,6 +7,7 @@ export const PRODUCT_DETAIL = "PRODUCT_DETAIL";
 export const CHANGE_PRODUCT_INPUT = "CHANGE_PRODUCT_INPUT";
 export const EMPTY_PRODUCT_MESSAGE = "EMPTY_PRODUCT_MESSAGE";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
-export const EDIT_PRODUCT = "EDIT_PRODUCT";
+export const EDIT_PRODUCT_INFO = "EDIT_PRODUCT";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 /*************** PRODUCT ******************/

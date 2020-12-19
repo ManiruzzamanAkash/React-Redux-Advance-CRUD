@@ -51,6 +51,13 @@ const ProductReducer = (state = initialState, action) => {
                 isLoading: action.payload.isLoading,
             };
 
+        case Types.EDIT_PRODUCT_INFO:
+            return {
+                ...state,
+                productData: action.payload.productDetail,
+                isLoading: action.payload.isLoading,
+            };
+
         case Types.CREATE_PRODUCT:
             return {
                 ...state,

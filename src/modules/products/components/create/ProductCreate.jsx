@@ -26,9 +26,6 @@ const ProductCreate = () => {
     const addMessage = useSelector((state) => state.product.addMessage);
     const productData = useSelector((state) => state.product.productData);
 
-    console.log('addStatus :>> ', addStatus);
-    console.log('addMessage :>> ', addMessage);
-
     const submitHandler = (data) => {
         dispatch(storeNewProduct(productData))
     }
@@ -38,11 +35,6 @@ const ProductCreate = () => {
     };
 
     useEffect(() => {
-        // if(history.location.pathname === '/auth/login'){
-        //     if(typeof authUserData !== 'undefined' && authUserData !== null ){
-        //         history.replace("/dashboard");
-        //     }
-        // }
         if (typeof addStatus !== 'undefined' && addStatus === true && addMessage !== null && addMessage.length > 0) {
             if (addStatus && addMessage.length > 0) {
                 dispatch(emptyProductMessage());
