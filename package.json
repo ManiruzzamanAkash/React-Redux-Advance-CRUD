@@ -2,6 +2,7 @@
     "name": "react-basic-crud",
     "version": "0.1.0",
     "private": true,
+    "homepage": "https://react-crud.devsenv.com",
     "dependencies": {
         "@hookform/resolvers": "^1.2.0",
         "@testing-library/jest-dom": "^5.11.6",
