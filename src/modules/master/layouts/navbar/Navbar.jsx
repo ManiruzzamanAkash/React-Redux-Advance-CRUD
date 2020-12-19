@@ -46,7 +46,7 @@ const Navbar = (props) => {
                             <div className="sidebar-brand-icon rotate-n-15">
                                 <img src="/logo192.png" style={{ width: 40 }} alt="" />
                             </div>
-                            <div className="sidebar-brand-text mx-3">
+                            <div className="sidebar-brand-text mx-3" style={{ fontSize: 12 }}>
                                 React CRUD
                             </div>
                         </div>

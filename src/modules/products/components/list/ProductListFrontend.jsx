@@ -45,7 +45,7 @@ const ProductListFrontend = () => {
                         <div className="row mb-5">
                             {
                                 products.map((product, index) => (
-                                    <div className="col-3 col-sm-4 col-md-3 col-lg-2" key={index}>
+                                    <div className="col-sm-6 col-md-3 col-lg-2" key={index}>
                                         <ProductShortInfoFrontend index={index} product={product} />
                                     </div>
                                 ))
