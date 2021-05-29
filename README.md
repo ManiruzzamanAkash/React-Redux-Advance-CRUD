@@ -1,6 +1,6 @@
-## React CRUD Application
+## React-Redux Advance CRUD Application
 
-A Complete CRUD Application using React, Redux, Thunk, Jwt Auth. 
+A Complete advance React-Redux CRUD Application using React, Redux, Thunk, Jwt Auth. 
 Live Preview Link - https://react-crud.devsenv.com/
 
 ### Technology, Framework & Library Used
